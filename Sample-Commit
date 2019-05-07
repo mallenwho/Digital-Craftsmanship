@@ -10,12 +10,10 @@
 // include list. There is NO need to add the h file for this cpp file.
 
 using namespace std;
-
 const double MAXRANGE = 255;
 const double MINRANGE = 0;
 
 // All user functions should be written here (above main)
-
 
 //WRITE PORT B
 void WritePortB(int value)
@@ -32,14 +30,13 @@ void WritePortB(int value)
 	if (fpipe != NULL)					   // check that the pipe opened correctly
 	{
 		while (fgets(line, sizeof(line), fpipe))
-		{   // do nothing here, or print out debug data
-
+		{   
+			// do nothing here, or print out debug data
 		}
 		_pclose(fpipe);   // close pipe
 	}
 	else cout << "Y";
 }
-
 
 //READ PIN C
 int ReadPinC()
@@ -59,11 +56,9 @@ int ReadPinC()
 		_pclose(fpipe);   // close pipe
 	}
 	else cout << "Y";
-
 	result = (int)atoi(line);
 	return result;
 }
-
 
 //READ ADC
 int ADC()
@@ -83,7 +78,6 @@ int ADC()
 		_pclose(fpipe);   // close pipe
 	}
 	else cout << "Y";
-
 	result = (int)atoi(line);
 	return result;
 }
@@ -99,8 +93,6 @@ void Binary(int result)
 	{
 		b0[count] = num % 2;
 		num = num / 2;
-
-
 		cout << b0[count];
 		count++;
 	}
