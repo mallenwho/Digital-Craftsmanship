@@ -1,0 +1,108 @@
+#include "stdafx.h"
+#include <iostream>
+#include <cstdlib>
+#include <time.h>
+#include <math.h>
+#include <errno.h>   
+#include <sstream>
+// Do NOT Add or remove any #include statements to this project!!
+// All library functions required should be covered by the above
+// include list. There is NO need to add the h file for this cpp file.
+
+using namespace std;
+
+const double MAXRANGE = 255;
+const double MINRANGE = 0;
+
+// All user functions should be written here (above main)
+
+
+//WRITE PORT B
+void WritePortB(int value)
+{
+	char command[256] = {"ousb -r io PORTB "};
+	FILE *fpipe;
+	char line[250] = {}; // size of Line should be smaller than command
+	char string[250] = {};
+
+	_itoa_s(value, string, 10);
+	strcat_s(command, string);
+
+	fpipe = (FILE*)_popen(command, "r");    // attempt to open pipe and execute a command
+	if (fpipe != NULL)					   // check that the pipe opened correctly
+	{
+		while (fgets(line, sizeof(line), fpipe))
+		{   // do nothing here, or print out debug data
+
+		}
+		_pclose(fpipe);   // close pipe
+	}
+	else cout << "Y";
+}
+
+
+//READ PIN C
+int ReadPinC()
+{
+	char command[256] = { "ousb -r io PINC" };
+	FILE *fpipe;
+	char line[250] = {}; // size of Line should be smaller than command
+	int result = 0;
+
+	fpipe = (FILE*)_popen(command, "r");    // attempt to open pipe and execute a command
+	if (fpipe != NULL)					   // check that the pipe opened correctly
+	{
+		while (fgets(line, sizeof(line), fpipe))
+		{   // do nothing here, or print out debug data
+
+		}
+		_pclose(fpipe);   // close pipe
+	}
+	else cout << "Y";
+
+	result = (int)atoi(line);
+	return result;
+}
+
+
+//READ ADC
+int ADC()
+{
+	char command[256] = { "ousb -r ADC 5" };
+	FILE *fpipe;
+	char line[250] = {}; // size of Line should be smaller than command
+	int result = 0;
+
+	fpipe = (FILE*)_popen(command, "r");    // attempt to open pipe and execute a command
+	if (fpipe != NULL)					   // check that the pipe opened correctly
+	{
+		while (fgets(line, sizeof(line), fpipe))
+		{   // do nothing here, or print out debug data
+
+		}
+		_pclose(fpipe);   // close pipe
+	}
+	else cout << "Y";
+
+	result = (int)atoi(line);
+	return result;
+}
+
+//BINARY CONVERSION
+void Binary(int result)
+{
+	int num = result;
+	int b0[8] = { 0,0,0,0,0,0,0,0 };
+	int count = 0;
+
+	while (num != 0)
+	{
+		b0[count] = num % 2;
+		num = num / 2;
+
+
+		cout << b0[count];
+		count++;
+	}
+	cout << endl;
+}
